@@ -2,8 +2,13 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { GameManager } from './game/gameManager.js';
 import { Player, GameMove } from './types/game.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const httpServer = createServer(app);
@@ -22,9 +27,18 @@ const playerGames: Map<string, string> = new Map(); // playerId -> gameId
 app.use(cors());
 app.use(express.json());
 
+// Servir arquivos estáticos do cliente
+const clientDistPath = path.join(__dirname, '../../client/dist');
+app.use(express.static(clientDistPath));
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
+});
+
+// SPA fallback - servir index.html para todas as rotas não encontradas
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 
 io.on('connection', (socket) => {

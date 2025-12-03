@@ -1,3 +1,11 @@
+.app-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
 .app-loading {
   display: flex;
   flex-direction: column;

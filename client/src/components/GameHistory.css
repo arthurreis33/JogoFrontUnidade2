@@ -1,0 +1,110 @@
+.game-history {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+  color: white;
+}
+
+.game-history h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.no-games {
+  text-align: center;
+  padding: 1rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.history-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.history-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #667eea;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.history-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.game-row {
+  transition: background-color 0.2s ease;
+}
+
+.game-row:hover {
+  background-color: #f5f5f5;
+}
+
+.game-row:last-child td {
+  border-bottom: none;
+}
+
+.player-name {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.winner {
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.winner.victory {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.winner.draw {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.timestamp {
+  font-size: 0.9rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .game-history {
+    padding: 1rem;
+  }
+
+  .history-table th,
+  .history-table td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .history-table {
+    font-size: 0.85rem;
+  }
+}

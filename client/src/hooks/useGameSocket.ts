@@ -2,17 +2,11 @@ import { useEffect, useState, useCallback } from 'react';
 import io, { Socket } from 'socket.io-client';
 import type { GameState } from '../types/game';
 
-// Detectar URL do servidor: usar IP da máquina ou localhost
+// Detectar URL do servidor
 const getSocketUrl = () => {
-  // Se estiver em localhost, conectar em localhost
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return 'http://localhost:3000';
-  }
-  // Se estiver em outra máquina, usar o mesmo hostname mas com porta 3000
-  // Assumindo que o servidor está rodando no mesmo host
-  const protocol = window.location.protocol;
-  const hostname = window.location.hostname;
-  return `${protocol}//${hostname}:3000`;
+  // Em produção, frontend e backend estão no mesmo servidor
+  // Socket.IO detecta automaticamente via location
+  return undefined; // Socket.IO usa window.location por padrão
 };
 
 const SOCKET_URL = getSocketUrl();

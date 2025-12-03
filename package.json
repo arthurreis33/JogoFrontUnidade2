@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
+    "build": "echo 'Build handled by build.sh'",
     "start": "node server/dist/index.js"
   },
   "devDependencies": {

@@ -3,8 +3,8 @@ services:
     name: jogo-multiplayer
     runtime: node
     plan: free
-    buildCommand: npm install && npm run install-all && npm run build
-    startCommand: npm start
+    buildCommand: bash build.sh
+    startCommand: node server/dist/index.js
     envVars:
       - key: NODE_ENV
         value: production

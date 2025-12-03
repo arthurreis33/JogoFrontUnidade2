@@ -1,0 +1,166 @@
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.game-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.game-header h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.players-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.player.active {
+  background-color: #f0f0ff;
+  border: 2px solid #667eea;
+}
+
+.player .symbol {
+  font-size: 32px;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.player .name {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.vs {
+  font-weight: bold;
+  color: #999;
+  font-size: 14px;
+}
+
+.game-status {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-playing {
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.status-playing.my-turn {
+  color: #667eea;
+  font-weight: bold;
+}
+
+.pulse {
+  display: inline-block;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.status-finished {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.result.win {
+  color: #4caf50;
+  background-color: #f1f8f4;
+}
+
+.result.lose {
+  color: #ff6b6b;
+  background-color: #ffe8e8;
+}
+
+.result.draw {
+  color: #ff9800;
+  background-color: #fff3e0;
+}
+
+.error-message {
+  background-color: #ffe8e8;
+  color: #ff6b6b;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.reset-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.reset-button:hover {
+  transform: scale(1.02);
+}
+
+.reset-button:active {
+  transform: scale(0.98);
+}

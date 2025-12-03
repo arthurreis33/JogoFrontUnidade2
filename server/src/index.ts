@@ -2,12 +2,8 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { GameManager } from './game/gameManager.js';
 import { Player, GameMove } from './types/game.js';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const httpServer = createServer(app);
@@ -26,26 +22,9 @@ const playerGames: Map<string, string> = new Map(); // playerId -> gameId
 app.use(cors());
 app.use(express.json());
 
-// Servir arquivos estáticos do cliente em produção
-const clientDistPath = process.env.NODE_ENV === 'production' 
-  ? path.join(process.cwd(), 'client/dist')
-  : path.join(__dirname, '../../client/dist');
-
-try {
-  app.use(express.static(clientDistPath));
-  console.log(`📁 Serving static files from: ${clientDistPath}`);
-} catch (err) {
-  console.warn(`⚠️ Could not serve static files from ${clientDistPath}`);
-}
-
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
-});
-
-// Servir index.html para rotas não encontradas (SPA)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 
 io.on('connection', (socket) => {
@@ -161,17 +140,7 @@ io.on('connection', (socket) => {
 
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const HOST = '0.0.0.0';
-
 httpServer.listen(PORT, HOST, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-});
-
-// Tratamento de erros não capturados
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
-});
-
-process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught Exception:', error);
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Access from other machines at: http://192.168.200.37:${PORT}`);
 });

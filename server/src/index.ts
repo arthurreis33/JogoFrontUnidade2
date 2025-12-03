@@ -27,8 +27,16 @@ app.use(cors());
 app.use(express.json());
 
 // Servir arquivos estáticos do cliente em produção
-const clientDistPath = path.join(__dirname, '../../client/dist');
-app.use(express.static(clientDistPath));
+const clientDistPath = process.env.NODE_ENV === 'production' 
+  ? path.join(process.cwd(), 'client/dist')
+  : path.join(__dirname, '../../client/dist');
+
+try {
+  app.use(express.static(clientDistPath));
+  console.log(`📁 Serving static files from: ${clientDistPath}`);
+} catch (err) {
+  console.warn(`⚠️ Could not serve static files from ${clientDistPath}`);
+}
 
 // Health check
 app.get('/health', (req, res) => {
@@ -153,7 +161,17 @@ io.on('connection', (socket) => {
 
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const HOST = '0.0.0.0';
+
 httpServer.listen(PORT, HOST, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Access from other machines at: http://192.168.200.37:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+});
+
+// Tratamento de erros não capturados
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('❌ Uncaught Exception:', error);
 });

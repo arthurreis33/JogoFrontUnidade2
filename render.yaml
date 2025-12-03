@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: jogo-server
+    name: jogo-multiplayer
     runtime: node
     plan: free
     buildCommand: npm install
@@ -8,15 +8,3 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 3000
-
-  - type: static
-    name: jogo-client
-    staticPublishPath: ./client/dist
-    buildCommand: cd client && npm install && npm run build
-    routes:
-      - path: /
-        index: index.html
-      - path: /*
-        index: index.html
